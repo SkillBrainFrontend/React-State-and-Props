@@ -1,0 +1,17 @@
+.item-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 10;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+p {
+  margin: 5px 0;
+}
