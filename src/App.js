@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./components/card/Card";
 import ItemList from "./components/item-list/ItemList";
@@ -6,268 +6,242 @@ import ItemList from "./components/item-list/ItemList";
 const MOCK = [
   {
     id: 1,
-    image: "https://robohash.org/voluptatemdolorest.png?size=50x50&set=set1",
-    ip_address: "7.154.174.21",
-    contry: "Indonesia",
+    cars: "911",
+    image: "https://robohash.org/repellatinventoreiste.png?size=50x50&set=set1",
+    votes: 7,
   },
   {
     id: 2,
-    image:
-      "https://robohash.org/voluptatemquasidebitis.png?size=50x50&set=set1",
-    ip_address: "225.80.140.35",
-    contry: "Argentina",
+    cars: "Truck",
+    image: "https://robohash.org/fugiatfugitomnis.png?size=50x50&set=set1",
+    votes: 11,
   },
   {
     id: 3,
-    image: "https://robohash.org/aistequaerat.png?size=50x50&set=set1",
-    ip_address: "137.82.197.119",
-    contry: "Sweden",
+    cars: "62",
+    image: "https://robohash.org/sitrecusandaeexpedita.png?size=50x50&set=set1",
+    votes: 10,
   },
   {
     id: 4,
-    image: "https://robohash.org/quisquiavel.png?size=50x50&set=set1",
-    ip_address: "52.153.2.111",
-    contry: "Portugal",
+    cars: "300E",
+    image: "https://robohash.org/etquasducimus.png?size=50x50&set=set1",
+    votes: 8,
   },
   {
     id: 5,
-    image: "https://robohash.org/autfacerepraesentium.png?size=50x50&set=set1",
-    ip_address: "17.155.79.48",
-    contry: "Poland",
+    cars: "Civic",
+    image:
+      "https://robohash.org/quasimolestiaeaccusamus.png?size=50x50&set=set1",
+    votes: 7,
   },
   {
     id: 6,
-    image: "https://robohash.org/cumutut.png?size=50x50&set=set1",
-    ip_address: "134.227.108.151",
-    contry: "France",
+    cars: "Ipsum",
+    image: "https://robohash.org/velanimilaboriosam.png?size=50x50&set=set1",
+    votes: 15,
   },
   {
     id: 7,
-    image: "https://robohash.org/temporeinaut.png?size=50x50&set=set1",
-    ip_address: "39.4.87.19",
-    contry: "Panama",
+    cars: "Town & Country",
+    image: "https://robohash.org/utofficiisnemo.png?size=50x50&set=set1",
+    votes: 4,
   },
   {
     id: 8,
-    image: "https://robohash.org/aquiserror.png?size=50x50&set=set1",
-    ip_address: "251.178.153.236",
-    contry: "Canada",
+    cars: "Ram Van 2500",
+    image: "https://robohash.org/ametomnismaxime.png?size=50x50&set=set1",
+    votes: 10,
   },
   {
     id: 9,
-    image: "https://robohash.org/liberoquirem.png?size=50x50&set=set1",
-    ip_address: "128.73.183.173",
-    contry: "Russia",
+    cars: "Cooper",
+    image:
+      "https://robohash.org/voluptatesquisquamodio.png?size=50x50&set=set1",
+    votes: 11,
   },
   {
     id: 10,
-    image: "https://robohash.org/iustoaliasquia.png?size=50x50&set=set1",
-    ip_address: "137.4.28.118",
-    contry: "Colombia",
+    cars: "Daewoo Kalos",
+    image: "https://robohash.org/corporistotamanimi.png?size=50x50&set=set1",
+    votes: 10,
   },
   {
     id: 11,
-    image: "https://robohash.org/laborevitaearchitecto.png?size=50x50&set=set1",
-    ip_address: "131.204.71.246",
-    contry: "Norway",
+    cars: "98",
+    image:
+      "https://robohash.org/voluptatesaccusamuspraesentium.png?size=50x50&set=set1",
+    votes: 13,
   },
   {
     id: 12,
-    image:
-      "https://robohash.org/magnilaudantiumaperiam.png?size=50x50&set=set1",
-    ip_address: "95.96.162.59",
-    contry: "China",
+    cars: "3 Series",
+    image: "https://robohash.org/idetveniam.png?size=50x50&set=set1",
+    votes: 7,
   },
   {
     id: 13,
-    image: "https://robohash.org/debitisabcumque.png?size=50x50&set=set1",
-    ip_address: "113.196.242.174",
-    contry: "China",
+    cars: "Torrent",
+    image: "https://robohash.org/hicdelectusamet.png?size=50x50&set=set1",
+    votes: 15,
   },
   {
     id: 14,
-    image: "https://robohash.org/quialiquamqui.png?size=50x50&set=set1",
-    ip_address: "168.193.91.143",
-    contry: "Portugal",
+    cars: "Accord",
+    image: "https://robohash.org/fugiatassumendaquam.png?size=50x50&set=set1",
+    votes: 11,
   },
   {
     id: 15,
-    image: "https://robohash.org/enimetrerum.png?size=50x50&set=set1",
-    ip_address: "173.158.18.32",
-    contry: "Indonesia",
+    cars: "Toronado",
+    image: "https://robohash.org/rationeutpraesentium.png?size=50x50&set=set1",
+    votes: 15,
   },
   {
     id: 16,
-    image: "https://robohash.org/estrecusandaedebitis.png?size=50x50&set=set1",
-    ip_address: "241.108.61.122",
-    contry: "Peru",
+    cars: "Bronco",
+    image: "https://robohash.org/rerumcupiditateet.png?size=50x50&set=set1",
+    votes: 14,
   },
   {
     id: 17,
-    image:
-      "https://robohash.org/asperioreslaboriosamest.png?size=50x50&set=set1",
-    ip_address: "56.113.184.213",
-    contry: "Kiribati",
+    cars: "Topaz",
+    image: "https://robohash.org/totamutin.png?size=50x50&set=set1",
+    votes: 18,
   },
   {
     id: 18,
-    image: "https://robohash.org/quiaeaoptio.png?size=50x50&set=set1",
-    ip_address: "130.110.77.15",
-    contry: "France",
+    cars: "Town & Country",
+    image:
+      "https://robohash.org/estexercitationemblanditiis.png?size=50x50&set=set1",
+    votes: 12,
   },
   {
     id: 19,
-    image: "https://robohash.org/numquamquiin.png?size=50x50&set=set1",
-    ip_address: "58.11.185.44",
-    contry: "Poland",
+    cars: "TrailBlazer",
+    image: "https://robohash.org/harumevenietsunt.png?size=50x50&set=set1",
+    votes: 5,
   },
   {
     id: 20,
-    image: "https://robohash.org/hicautemperferendis.png?size=50x50&set=set1",
-    ip_address: "49.167.232.220",
-    contry: "Nauru",
+    cars: "Sierra 2500",
+    image: "https://robohash.org/aipsamut.png?size=50x50&set=set1",
+    votes: 18,
   },
   {
     id: 21,
-    image: "https://robohash.org/etsitnam.png?size=50x50&set=set1",
-    ip_address: "60.150.113.209",
-    contry: "Philippines",
+    cars: "IS F",
+    image: "https://robohash.org/aperiamsuntdolores.png?size=50x50&set=set1",
+    votes: 12,
   },
   {
     id: 22,
-    image: "https://robohash.org/inventoremagnisaepe.png?size=50x50&set=set1",
-    ip_address: "60.70.191.113",
-    contry: "Indonesia",
+    cars: "CLK-Class",
+    image:
+      "https://robohash.org/voluptatumrecusandaerepellat.png?size=50x50&set=set1",
+    votes: 15,
   },
   {
     id: 23,
-    image: "https://robohash.org/rerumquasisit.png?size=50x50&set=set1",
-    ip_address: "245.87.232.35",
-    contry: "Indonesia",
+    cars: "Grand Prix",
+    image: "https://robohash.org/nesciuntomnisenim.png?size=50x50&set=set1",
+    votes: 1,
   },
   {
     id: 24,
-    image: "https://robohash.org/veroquirepudiandae.png?size=50x50&set=set1",
-    ip_address: "255.54.51.16",
-    contry: "China",
+    cars: "4Runner",
+    image:
+      "https://robohash.org/beataerecusandaereiciendis.png?size=50x50&set=set1",
+    votes: 15,
   },
   {
     id: 25,
-    image:
-      "https://robohash.org/veniamreprehenderitquo.png?size=50x50&set=set1",
-    ip_address: "79.187.63.209",
-    contry: "China",
+    cars: "Mustang",
+    image: "https://robohash.org/exveniamminima.png?size=50x50&set=set1",
+    votes: 14,
   },
   {
     id: 26,
-    image:
-      "https://robohash.org/laudantiumconsequaturodio.png?size=50x50&set=set1",
-    ip_address: "239.4.217.151",
-    contry: "Indonesia",
+    cars: "Cooper",
+    image: "https://robohash.org/officiisquasifugiat.png?size=50x50&set=set1",
+    votes: 18,
   },
   {
     id: 27,
-    image: "https://robohash.org/optionamomnis.png?size=50x50&set=set1",
-    ip_address: "41.80.97.253",
-    contry: "Portugal",
+    cars: "Stratus",
+    image: "https://robohash.org/doloremomnisoptio.png?size=50x50&set=set1",
+    votes: 13,
   },
   {
     id: 28,
-    image:
-      "https://robohash.org/autsuscipitrepellendus.png?size=50x50&set=set1",
-    ip_address: "152.89.227.138",
-    contry: "Indonesia",
+    cars: "Prius",
+    image: "https://robohash.org/saepequiet.png?size=50x50&set=set1",
+    votes: 8,
   },
   {
     id: 29,
-    image: "https://robohash.org/autdelectusex.png?size=50x50&set=set1",
-    ip_address: "159.186.126.13",
-    contry: "Democratic Republic of the Congo",
+    cars: "Town & Country",
+    image: "https://robohash.org/voluptatesitrerum.png?size=50x50&set=set1",
+    votes: 20,
   },
   {
     id: 30,
-    image: "https://robohash.org/nullailloodio.png?size=50x50&set=set1",
-    ip_address: "44.60.42.118",
-    contry: "China",
-  },
-  {
-    id: 31,
+    cars: "Sierra 1500",
     image:
-      "https://robohash.org/cupiditaterepudiandaevoluptatem.png?size=50x50&set=set1",
-    ip_address: "232.206.53.76",
-    contry: "Chad",
-  },
-  {
-    id: 32,
-    image:
-      "https://robohash.org/doloremquedolorsuscipit.png?size=50x50&set=set1",
-    ip_address: "175.39.171.208",
-    contry: "France",
-  },
-  {
-    id: 33,
-    image:
-      "https://robohash.org/ducimuspossimusmolestias.png?size=50x50&set=set1",
-    ip_address: "185.244.124.204",
-    contry: "Belarus",
-  },
-  {
-    id: 34,
-    image:
-      "https://robohash.org/exercitationemomnisneque.png?size=50x50&set=set1",
-    ip_address: "126.9.160.75",
-    contry: "South Korea",
-  },
-  {
-    id: 35,
-    image: "https://robohash.org/aliquidnonet.png?size=50x50&set=set1",
-    ip_address: "187.49.244.78",
-    contry: "Latvia",
-  },
-  {
-    id: 36,
-    image: "https://robohash.org/iureomnisnumquam.png?size=50x50&set=set1",
-    ip_address: "216.4.97.34",
-    contry: "Pakistan",
-  },
-  {
-    id: 37,
-    image: "https://robohash.org/quaemaximeet.png?size=50x50&set=set1",
-    ip_address: "149.53.215.13",
-    contry: "Russia",
-  },
-  {
-    id: 38,
-    image: "https://robohash.org/ullamnisiducimus.png?size=50x50&set=set1",
-    ip_address: "75.63.62.91",
-    contry: "Slovenia",
-  },
-  {
-    id: 39,
-    image:
-      "https://robohash.org/voluptatemvoluptatenulla.png?size=50x50&set=set1",
-    ip_address: "53.55.35.157",
-    contry: "Spain",
-  },
-  {
-    id: 40,
-    image: "https://robohash.org/quisistevero.png?size=50x50&set=set1",
-    ip_address: "128.250.215.118",
-    contry: "China",
+      "https://robohash.org/officiisomnissimilique.png?size=50x50&set=set1",
+    votes: 3,
   },
 ];
 
 function App() {
-  const [country, setCountry] = useState("Press the button");
-  const onButtonClick = (param) => {
-    setCountry(param);
+  const [cars, setCars] = useState(MOCK);
+
+  const getTopCar = () => {
+    let maxVotes = 0;
+    let bestCar = {};
+
+    cars.forEach((item) => {
+      if (item.votes > maxVotes) {
+        maxVotes = item.votes;
+        bestCar = item;
+      }
+    });
+
+    return bestCar;
+  };
+  let a = 1;
+  const topCar = getTopCar();
+
+  // const topCar = cars.reduce(
+  //   (acumulator, currentItem) => {
+  //     if (currentItem.votes > acumulator.votes) {
+  //       return currentItem;
+  //     }
+  //     return acumulator;
+  //   },
+  //   { votes: 0 }
+  // );
+
+  const onButtonClick = (id) => {
+    const newArr = cars.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          votes: item.votes + 1,
+        };
+      }
+      return item;
+    });
+    a += 1;
+    console.log("AAA", a);
+    setCars(newArr);
   };
 
   return (
     <div className="App">
       <div className="App-header">
-        <Card>
-          <h3>{country}</h3>
+        <Card value={10}>
+          <h3>{topCar.cars + " " + topCar.votes}</h3>
           <form>
             {/* <Input onChange={() => {}} placeholder="Title" type="text" />
             <TextArea onChange={() => {}} placeholder="Description" />
@@ -275,7 +249,7 @@ function App() {
           </form>
         </Card>
 
-        <ItemList items={MOCK} adi={onButtonClick} />
+        <ItemList items={cars} onVoteClick={onButtonClick} />
       </div>
     </div>
   );
